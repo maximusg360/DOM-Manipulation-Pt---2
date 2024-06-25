@@ -1,3 +1,5 @@
+import { buildSubMenuEl } from "./helper.js";
+
 const menuLinks = [
     { text: "about", href: "/about" },
     {
@@ -81,7 +83,7 @@ const menuLinks = [
           if (link.text === currentLink) {
             if (link.hasOwnProperty("subLinks")) {
               subMenuEl.style.top = "100%";
-              buildSubMenuEl(link.subLinks);
+              buildSubMenuEl(link.subLinks, subMenuEl);
             } else {
               subMenuEl.style.top = "0";
             }
@@ -91,16 +93,7 @@ const menuLinks = [
     }
   });
   
-  function buildSubMenuEl(array) {
-    subMenuEl.innerHTML = "";
-    array.forEach((link) => {
-      let aEl = document.createElement("a");
-      aEl.setAttribute("href", link.href);
-      aEl.innerHTML = link.text;
-      subMenuEl.append(aEl);
-    });
-  }
-  
+ 
   subMenuEl.addEventListener("click", (event) => {
     event.preventDefault();
     if (!event.target.matches("a")) {
